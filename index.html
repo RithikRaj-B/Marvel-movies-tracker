@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Infinity Log — Complete Marvel Completionist Tracker</title>
+<title>Infinity Log — MCU Completionist Tracker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -110,13 +110,13 @@
   .filter-row{display:flex; gap:10px; flex-wrap:wrap;}
   .filter-btn{
     font-family:'Inter', sans-serif;
-    font-weight:600;
+    font-weight:700;
     font-size:13px;
-    letter-spacing:0.03em;
+    letter-spacing:0.04em;
     background:var(--card);
     border:1px solid var(--border);
     color:var(--gray);
-    padding:10px 20px;
+    padding:10px 22px;
     border-radius:999px;
     cursor:pointer;
     transition:all .18s ease;
@@ -276,7 +276,7 @@
   }
   .type-movie{border-color:rgba(229,9,20,0.6); color:#ff6b6f;}
   .type-series{border-color:rgba(91,200,255,0.5); color:#5bc8ff;}
-  .type-short{border-color:rgba(201,162,75,0.5); color:#e0bd6a;}
+  .type-short, .type-animated{border-color:rgba(201,162,75,0.5); color:#e0bd6a;}
   .type-special{border-color:rgba(162,75,214,0.5); color:#c47bff;}
 
   .watch-toggle{
@@ -368,11 +368,11 @@
 
   <div class="hero-controls">
     <div class="filter-row" id="filterRow">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="movie">Movies</button>
-      <button class="filter-btn" data-filter="series">Series</button>
-      <button class="filter-btn" data-filter="short-anim">Shorts & Animated</button>
-      <button class="filter-btn" data-filter="special">Specials</button>
+      <button class="filter-btn active" data-filter="all">ALL</button>
+      <button class="filter-btn" data-filter="movie">MOVIES</button>
+      <button class="filter-btn" data-filter="series">SERIES</button>
+      <button class="filter-btn" data-filter="short-anim">SHORTS & ANIMATED</button>
+      <button class="filter-btn" data-filter="special">SPECIALS</button>
     </div>
     <div class="search-wrap">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#A0A0A0" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -406,7 +406,7 @@
 
 <script>
 /* =========================================================
-   DATA — Complete Marvel Content Universe
+   DATA — Complete Marvel Content Universe (Full Dataset)
    ========================================================= */
 const MCU_DATA = [
   // Legacy Marvel (Classic X-Men, Spider-Man, Blade, Ghost Rider, Daredevil)
