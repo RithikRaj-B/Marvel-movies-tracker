@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Infinity Log — MCU Completionist Tracker</title>
+<title>Infinity Log — MCU & Marvel Completionist Tracker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -111,12 +111,12 @@
   .filter-btn{
     font-family:'Inter', sans-serif;
     font-weight:700;
-    font-size:13px;
+    font-size:12px;
     letter-spacing:0.04em;
     background:var(--card);
     border:1px solid var(--border);
     color:var(--gray);
-    padding:10px 22px;
+    padding:10px 20px;
     border-radius:999px;
     cursor:pointer;
     transition:all .18s ease;
@@ -369,6 +369,10 @@
   <div class="hero-controls">
     <div class="filter-row" id="filterRow">
       <button class="filter-btn active" data-filter="all">ALL</button>
+      <button class="filter-btn" data-filter="mcu">MCU PHASES</button>
+      <button class="filter-btn" data-filter="legacy">LEGACY MARVEL</button>
+      <button class="filter-btn" data-filter="defenders">DEFENDERS SAGA</button>
+      <button class="filter-btn" data-filter="spiderverse">SPIDER-VERSE & SSU</button>
       <button class="filter-btn" data-filter="movie">MOVIES</button>
       <button class="filter-btn" data-filter="series">SERIES</button>
       <button class="filter-btn" data-filter="short-anim">SHORTS & ANIMATED</button>
@@ -406,147 +410,147 @@
 
 <script>
 /* =========================================================
-   DATA — Complete Marvel Content Universe (Full Dataset)
+   DATA — Complete Marvel Content Universe
    ========================================================= */
 const MCU_DATA = [
   // Legacy Marvel (Classic X-Men, Spider-Man, Blade, Ghost Rider, Daredevil)
-  {id:"blade", title:"Blade", year:1998, type:"movie", phase:"Legacy Marvel", poster:"posters/blade.jpg"},
-  {id:"x-men", title:"X-Men", year:2000, type:"movie", phase:"Legacy Marvel", poster:"posters/x-men.jpg"},
-  {id:"blade-2", title:"Blade II", year:2002, type:"movie", phase:"Legacy Marvel", poster:"posters/blade-2.jpg"},
-  {id:"spider-man", title:"Spider-Man", year:2002, type:"movie", phase:"Legacy Marvel", poster:"posters/spider-man.jpg"},
-  {id:"daredevil-2003", title:"Daredevil", year:2003, type:"movie", phase:"Legacy Marvel", poster:"posters/daredevil-2003.jpg"},
-  {id:"x2", title:"X2: X-Men United", year:2003, type:"movie", phase:"Legacy Marvel", poster:"posters/x2.jpg"},
-  {id:"hulk-2003", title:"Hulk", year:2003, type:"movie", phase:"Legacy Marvel", poster:"posters/hulk-2003.jpg"},
-  {id:"punisher-2004", title:"The Punisher", year:2004, type:"movie", phase:"Legacy Marvel", poster:"posters/punisher-2004.jpg"},
-  {id:"spider-man-2", title:"Spider-Man 2", year:2004, type:"movie", phase:"Legacy Marvel", poster:"posters/spider-man-2.jpg"},
-  {id:"blade-trinity", title:"Blade: Trinity", year:2004, type:"movie", phase:"Legacy Marvel", poster:"posters/blade-trinity.jpg"},
-  {id:"elektra", title:"Elektra", year:2005, type:"movie", phase:"Legacy Marvel", poster:"posters/elektra.jpg"},
-  {id:"fantastic-four-2005", title:"Fantastic Four", year:2005, type:"movie", phase:"Legacy Marvel", poster:"posters/fantastic-four-2005.jpg"},
-  {id:"x-men-last-stand", title:"X-Men: The Last Stand", year:2006, type:"movie", phase:"Legacy Marvel", poster:"posters/x-men-last-stand.jpg"},
-  {id:"ghost-rider", title:"Ghost Rider", year:2007, type:"movie", phase:"Legacy Marvel", poster:"posters/ghost-rider.jpg"},
-  {id:"spider-man-3", title:"Spider-Man 3", year:2007, type:"movie", phase:"Legacy Marvel", poster:"posters/spider-man-3.jpg"},
-  {id:"ff-silver-surfer", title:"Fantastic Four: Rise of the Silver Surfer", year:2007, type:"movie", phase:"Legacy Marvel", poster:"posters/ff-silver-surfer.jpg"},
-  {id:"punisher-war-zone", title:"Punisher: War Zone", year:2008, type:"movie", phase:"Legacy Marvel", poster:"posters/punisher-war-zone.jpg"},
-  {id:"x-men-origins-wolverine", title:"X-Men Origins: Wolverine", year:2009, type:"movie", phase:"Legacy Marvel", poster:"posters/x-men-origins-wolverine.jpg"},
-  {id:"x-men-first-class", title:"X-Men: First Class", year:2011, type:"movie", phase:"Legacy Marvel", poster:"posters/x-men-first-class.jpg"},
-  {id:"ghost-rider-2", title:"Ghost Rider: Spirit of Vengeance", year:2011, type:"movie", phase:"Legacy Marvel", poster:"posters/ghost-rider-2.jpg"},
-  {id:"amazing-spider-man", title:"The Amazing Spider-Man", year:2012, type:"movie", phase:"Legacy Marvel", poster:"posters/amazing-spider-man.jpg"},
-  {id:"the-wolverine", title:"The Wolverine", year:2013, type:"movie", phase:"Legacy Marvel", poster:"posters/the-wolverine.jpg"},
-  {id:"amazing-spider-man-2", title:"The Amazing Spider-Man 2", year:2014, type:"movie", phase:"Legacy Marvel", poster:"posters/amazing-spider-man-2.jpg"},
-  {id:"x-men-dofp", title:"X-Men: Days of Future Past", year:2014, type:"movie", phase:"Legacy Marvel", poster:"posters/x-men-dofp.jpg"},
-  {id:"fantastic-four-2015", title:"Fantastic Four", year:2015, type:"movie", phase:"Legacy Marvel", poster:"posters/fantastic-four-2015.jpg"},
-  {id:"deadpool-1", title:"Deadpool", year:2016, type:"movie", phase:"Legacy Marvel", poster:"posters/deadpool-1.jpg"},
-  {id:"x-men-apocalypse", title:"X-Men: Apocalypse", year:2016, type:"movie", phase:"Legacy Marvel", poster:"posters/x-men-apocalypse.jpg"},
-  {id:"logan", title:"Logan", year:2017, type:"movie", phase:"Legacy Marvel", poster:"posters/logan.jpg"},
-  {id:"deadpool-2", title:"Deadpool 2", year:2018, type:"movie", phase:"Legacy Marvel", poster:"posters/deadpool-2.jpg"},
-  {id:"dark-phoenix", title:"X-Men: Dark Phoenix", year:2019, type:"movie", phase:"Legacy Marvel", poster:"posters/dark-phoenix.jpg"},
-  {id:"new-mutants", title:"The New Mutants", year:2020, type:"movie", phase:"Legacy Marvel", poster:"posters/new-mutants.jpg"},
+  {id:"blade", title:"Blade", year:1998, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/blade.jpg"},
+  {id:"x-men", title:"X-Men", year:2000, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/x-men.jpg"},
+  {id:"blade-2", title:"Blade II", year:2002, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/blade-2.jpg"},
+  {id:"spider-man", title:"Spider-Man", year:2002, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/spider-man.jpg"},
+  {id:"daredevil-2003", title:"Daredevil", year:2003, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/daredevil-2003.jpg"},
+  {id:"x2", title:"X2: X-Men United", year:2003, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/x2.jpg"},
+  {id:"hulk-2003", title:"Hulk", year:2003, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/hulk-2003.jpg"},
+  {id:"punisher-2004", title:"The Punisher", year:2004, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/punisher-2004.jpg"},
+  {id:"spider-man-2", title:"Spider-Man 2", year:2004, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/spider-man-2.jpg"},
+  {id:"blade-trinity", title:"Blade: Trinity", year:2004, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/blade-trinity.jpg"},
+  {id:"elektra", title:"Elektra", year:2005, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/elektra.jpg"},
+  {id:"fantastic-four-2005", title:"Fantastic Four", year:2005, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/fantastic-four-2005.jpg"},
+  {id:"x-men-last-stand", title:"X-Men: The Last Stand", year:2006, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/x-men-last-stand.jpg"},
+  {id:"ghost-rider", title:"Ghost Rider", year:2007, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/ghost-rider.jpg"},
+  {id:"spider-man-3", title:"Spider-Man 3", year:2007, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/spider-man-3.jpg"},
+  {id:"ff-silver-surfer", title:"Fantastic Four: Rise of the Silver Surfer", year:2007, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/ff-silver-surfer.jpg"},
+  {id:"punisher-war-zone", title:"Punisher: War Zone", year:2008, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/punisher-war-zone.jpg"},
+  {id:"x-men-origins-wolverine", title:"X-Men Origins: Wolverine", year:2009, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/x-men-origins-wolverine.jpg"},
+  {id:"x-men-first-class", title:"X-Men: First Class", year:2011, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/x-men-first-class.jpg"},
+  {id:"ghost-rider-2", title:"Ghost Rider: Spirit of Vengeance", year:2011, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/ghost-rider-2.jpg"},
+  {id:"amazing-spider-man", title:"The Amazing Spider-Man", year:2012, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/amazing-spider-man.jpg"},
+  {id:"the-wolverine", title:"The Wolverine", year:2013, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/the-wolverine.jpg"},
+  {id:"amazing-spider-man-2", title:"The Amazing Spider-Man 2", year:2014, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/amazing-spider-man-2.jpg"},
+  {id:"x-men-dofp", title:"X-Men: Days of Future Past", year:2014, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/x-men-dofp.jpg"},
+  {id:"fantastic-four-2015", title:"Fantastic Four", year:2015, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/fantastic-four-2015.jpg"},
+  {id:"deadpool-1", title:"Deadpool", year:2016, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/deadpool-1.jpg"},
+  {id:"x-men-apocalypse", title:"X-Men: Apocalypse", year:2016, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/x-men-apocalypse.jpg"},
+  {id:"logan", title:"Logan", year:2017, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/logan.jpg"},
+  {id:"deadpool-2", title:"Deadpool 2", year:2018, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/deadpool-2.jpg"},
+  {id:"dark-phoenix", title:"X-Men: Dark Phoenix", year:2019, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/dark-phoenix.jpg"},
+  {id:"new-mutants", title:"The New Mutants", year:2020, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/new-mutants.jpg"},
 
   // MCU Phase One
-  {id:"iron-man", title:"Iron Man", year:2008, type:"movie", phase:"Phase One", poster:"posters/iron-man.jpg"},
-  {id:"incredible-hulk", title:"The Incredible Hulk", year:2008, type:"movie", phase:"Phase One", poster:"posters/incredible-hulk.jpg"},
-  {id:"iron-man-2", title:"Iron Man 2", year:2010, type:"movie", phase:"Phase One", poster:"posters/iron-man-2.jpg"},
-  {id:"thor", title:"Thor", year:2011, type:"movie", phase:"Phase One", poster:"posters/thor.jpg"},
-  {id:"cap-first-avenger", title:"Captain America: The First Avenger", year:2011, type:"movie", phase:"Phase One", poster:"posters/cap-first-avenger.jpg"},
-  {id:"one-shot-consultant", title:"The Consultant", year:2011, type:"short", phase:"Phase One", poster:"posters/one-shot-consultant.jpg"},
-  {id:"one-shot-funny-thing", title:"A Funny Thing Happened on the Way to Thor's Hammer", year:2011, type:"short", phase:"Phase One", poster:"posters/one-shot-funny-thing.jpg"},
-  {id:"avengers", title:"The Avengers", year:2012, type:"movie", phase:"Phase One", poster:"posters/avengers.jpg"},
-  {id:"one-shot-item-47", title:"Item 47", year:2012, type:"short", phase:"Phase One", poster:"posters/one-shot-item-47.jpg"},
+  {id:"iron-man", title:"Iron Man", year:2008, type:"movie", universe:"mcu", phase:"Phase One", poster:"posters/iron-man.jpg"},
+  {id:"incredible-hulk", title:"The Incredible Hulk", year:2008, type:"movie", universe:"mcu", phase:"Phase One", poster:"posters/incredible-hulk.jpg"},
+  {id:"iron-man-2", title:"Iron Man 2", year:2010, type:"movie", universe:"mcu", phase:"Phase One", poster:"posters/iron-man-2.jpg"},
+  {id:"thor", title:"Thor", year:2011, type:"movie", universe:"mcu", phase:"Phase One", poster:"posters/thor.jpg"},
+  {id:"cap-first-avenger", title:"Captain America: The First Avenger", year:2011, type:"movie", universe:"mcu", phase:"Phase One", poster:"posters/cap-first-avenger.jpg"},
+  {id:"one-shot-consultant", title:"The Consultant", year:2011, type:"short", universe:"mcu", phase:"Phase One", poster:"posters/one-shot-consultant.jpg"},
+  {id:"one-shot-funny-thing", title:"A Funny Thing Happened on the Way to Thor's Hammer", year:2011, type:"short", universe:"mcu", phase:"Phase One", poster:"posters/one-shot-funny-thing.jpg"},
+  {id:"avengers", title:"The Avengers", year:2012, type:"movie", universe:"mcu", phase:"Phase One", poster:"posters/avengers.jpg"},
+  {id:"one-shot-item-47", title:"Item 47", year:2012, type:"short", universe:"mcu", phase:"Phase One", poster:"posters/one-shot-item-47.jpg"},
 
   // MCU Phase Two
-  {id:"iron-man-3", title:"Iron Man 3", year:2013, type:"movie", phase:"Phase Two", poster:"posters/iron-man-3.jpg"},
-  {id:"one-shot-agent-carter", title:"Agent Carter (One-Shot)", year:2013, type:"short", phase:"Phase Two", poster:"posters/one-shot-agent-carter.jpg"},
-  {id:"agents-of-shield-s1", title:"Agents of S.H.I.E.L.D. (Season 1)", year:2013, type:"series", phase:"Phase Two", poster:"posters/agents-of-shield-s1.jpg"},
-  {id:"thor-dark-world", title:"Thor: The Dark World", year:2013, type:"movie", phase:"Phase Two", poster:"posters/thor-dark-world.jpg"},
-  {id:"one-shot-all-hail-king", title:"All Hail the King", year:2014, type:"short", phase:"Phase Two", poster:"posters/one-shot-all-hail-king.jpg"},
-  {id:"cap-winter-soldier", title:"Captain America: The Winter Soldier", year:2014, type:"movie", phase:"Phase Two", poster:"posters/cap-winter-soldier.jpg"},
-  {id:"gotg", title:"Guardians of the Galaxy", year:2014, type:"movie", phase:"Phase Two", poster:"posters/gotg.jpg"},
-  {id:"agent-carter-s1", title:"Agent Carter (Season 1)", year:2015, type:"series", phase:"Phase Two", poster:"posters/agent-carter-s1.jpg"},
-  {id:"avengers-aou", title:"Avengers: Age of Ultron", year:2015, type:"movie", phase:"Phase Two", poster:"posters/avengers-aou.jpg"},
-  {id:"ant-man", title:"Ant-Man", year:2015, type:"movie", phase:"Phase Two", poster:"posters/ant-man.jpg"},
+  {id:"iron-man-3", title:"Iron Man 3", year:2013, type:"movie", universe:"mcu", phase:"Phase Two", poster:"posters/iron-man-3.jpg"},
+  {id:"one-shot-agent-carter", title:"Agent Carter (One-Shot)", year:2013, type:"short", universe:"mcu", phase:"Phase Two", poster:"posters/one-shot-agent-carter.jpg"},
+  {id:"agents-of-shield-s1", title:"Agents of S.H.I.E.L.D. (Season 1)", year:2013, type:"series", universe:"mcu", phase:"Phase Two", poster:"posters/agents-of-shield-s1.jpg"},
+  {id:"thor-dark-world", title:"Thor: The Dark World", year:2013, type:"movie", universe:"mcu", phase:"Phase Two", poster:"posters/thor-dark-world.jpg"},
+  {id:"one-shot-all-hail-king", title:"All Hail the King", year:2014, type:"short", universe:"mcu", phase:"Phase Two", poster:"posters/one-shot-all-hail-king.jpg"},
+  {id:"cap-winter-soldier", title:"Captain America: The Winter Soldier", year:2014, type:"movie", universe:"mcu", phase:"Phase Two", poster:"posters/cap-winter-soldier.jpg"},
+  {id:"gotg", title:"Guardians of the Galaxy", year:2014, type:"movie", universe:"mcu", phase:"Phase Two", poster:"posters/gotg.jpg"},
+  {id:"agent-carter-s1", title:"Agent Carter (Season 1)", year:2015, type:"series", universe:"mcu", phase:"Phase Two", poster:"posters/agent-carter-s1.jpg"},
+  {id:"avengers-aou", title:"Avengers: Age of Ultron", year:2015, type:"movie", universe:"mcu", phase:"Phase Two", poster:"posters/avengers-aou.jpg"},
+  {id:"ant-man", title:"Ant-Man", year:2015, type:"movie", universe:"mcu", phase:"Phase Two", poster:"posters/ant-man.jpg"},
 
-  // Defenders Saga (Marvel Television)
-  {id:"daredevil-s1", title:"Daredevil (Season 1)", year:2015, type:"series", phase:"The Defenders Saga", poster:"posters/daredevil-s1.jpg"},
-  {id:"jessica-jones-s1", title:"Jessica Jones (Season 1)", year:2015, type:"series", phase:"The Defenders Saga", poster:"posters/jessica-jones-s1.jpg"},
-  {id:"daredevil-s2", title:"Daredevil (Season 2)", year:2016, type:"series", phase:"The Defenders Saga", poster:"posters/daredevil-s2.jpg"},
-  {id:"luke-cage-s1", title:"Luke Cage (Season 1)", year:2016, type:"series", phase:"The Defenders Saga", poster:"posters/luke-cage-s1.jpg"},
-  {id:"iron-fist-s1", title:"Iron Fist (Season 1)", year:2017, type:"series", phase:"The Defenders Saga", poster:"posters/iron-fist-s1.jpg"},
-  {id:"defenders-s1", title:"The Defenders", year:2017, type:"series", phase:"The Defenders Saga", poster:"posters/defenders-s1.jpg"},
-  {id:"punisher-s1", title:"The Punisher (Season 1)", year:2017, type:"series", phase:"The Defenders Saga", poster:"posters/punisher-s1.jpg"},
-  {id:"jessica-jones-s2", title:"Jessica Jones (Season 2)", year:2018, type:"series", phase:"The Defenders Saga", poster:"posters/jessica-jones-s2.jpg"},
-  {id:"luke-cage-s2", title:"Luke Cage (Season 2)", year:2018, type:"series", phase:"The Defenders Saga", poster:"posters/luke-cage-s2.jpg"},
-  {id:"iron-fist-s2", title:"Iron Fist (Season 2)", year:2018, type:"series", phase:"The Defenders Saga", poster:"posters/iron-fist-s2.jpg"},
-  {id:"daredevil-s3", title:"Daredevil (Season 3)", year:2018, type:"series", phase:"The Defenders Saga", poster:"posters/daredevil-s3.jpg"},
-  {id:"punisher-s2", title:"The Punisher (Season 2)", year:2019, type:"series", phase:"The Defenders Saga", poster:"posters/punisher-s2.jpg"},
-  {id:"jessica-jones-s3", title:"Jessica Jones (Season 3)", year:2019, type:"series", phase:"The Defenders Saga", poster:"posters/jessica-jones-s3.jpg"},
+  // Defenders Saga
+  {id:"daredevil-s1", title:"Daredevil (Season 1)", year:2015, type:"series", universe:"defenders", phase:"The Defenders Saga", poster:"posters/daredevil-s1.jpg"},
+  {id:"jessica-jones-s1", title:"Jessica Jones (Season 1)", year:2015, type:"series", universe:"defenders", phase:"The Defenders Saga", poster:"posters/jessica-jones-s1.jpg"},
+  {id:"daredevil-s2", title:"Daredevil (Season 2)", year:2016, type:"series", universe:"defenders", phase:"The Defenders Saga", poster:"posters/daredevil-s2.jpg"},
+  {id:"luke-cage-s1", title:"Luke Cage (Season 1)", year:2016, type:"series", universe:"defenders", phase:"The Defenders Saga", poster:"posters/luke-cage-s1.jpg"},
+  {id:"iron-fist-s1", title:"Iron Fist (Season 1)", year:2017, type:"series", universe:"defenders", phase:"The Defenders Saga", poster:"posters/iron-fist-s1.jpg"},
+  {id:"defenders-s1", title:"The Defenders", year:2017, type:"series", universe:"defenders", phase:"The Defenders Saga", poster:"posters/defenders-s1.jpg"},
+  {id:"punisher-s1", title:"The Punisher (Season 1)", year:2017, type:"series", universe:"defenders", phase:"The Defenders Saga", poster:"posters/punisher-s1.jpg"},
+  {id:"jessica-jones-s2", title:"Jessica Jones (Season 2)", year:2018, type:"series", universe:"defenders", phase:"The Defenders Saga", poster:"posters/jessica-jones-s2.jpg"},
+  {id:"luke-cage-s2", title:"Luke Cage (Season 2)", year:2018, type:"series", universe:"defenders", phase:"The Defenders Saga", poster:"posters/luke-cage-s2.jpg"},
+  {id:"iron-fist-s2", title:"Iron Fist (Season 2)", year:2018, type:"series", universe:"defenders", phase:"The Defenders Saga", poster:"posters/iron-fist-s2.jpg"},
+  {id:"daredevil-s3", title:"Daredevil (Season 3)", year:2018, type:"series", universe:"defenders", phase:"The Defenders Saga", poster:"posters/daredevil-s3.jpg"},
+  {id:"punisher-s2", title:"The Punisher (Season 2)", year:2019, type:"series", universe:"defenders", phase:"The Defenders Saga", poster:"posters/punisher-s2.jpg"},
+  {id:"jessica-jones-s3", title:"Jessica Jones (Season 3)", year:2019, type:"series", universe:"defenders", phase:"The Defenders Saga", poster:"posters/jessica-jones-s3.jpg"},
 
   // MCU Phase Three
-  {id:"agent-carter-s2", title:"Agent Carter (Season 2)", year:2016, type:"series", phase:"Phase Three", poster:"posters/agent-carter-s2.jpg"},
-  {id:"civil-war", title:"Captain America: Civil War", year:2016, type:"movie", phase:"Phase Three", poster:"posters/civil-war.jpg"},
-  {id:"doctor-strange", title:"Doctor Strange", year:2016, type:"movie", phase:"Phase Three", poster:"posters/doctor-strange.jpg"},
-  {id:"gotg-2", title:"Guardians of the Galaxy Vol. 2", year:2017, type:"movie", phase:"Phase Three", poster:"posters/gotg-2.jpg"},
-  {id:"spiderman-homecoming", title:"Spider-Man: Homecoming", year:2017, type:"movie", phase:"Phase Three", poster:"posters/spiderman-homecoming.jpg"},
-  {id:"thor-ragnarok", title:"Thor: Ragnarok", year:2017, type:"movie", phase:"Phase Three", poster:"posters/thor-ragnarok.jpg"},
-  {id:"black-panther", title:"Black Panther", year:2018, type:"movie", phase:"Phase Three", poster:"posters/black-panther.jpg"},
-  {id:"infinity-war", title:"Avengers: Infinity War", year:2018, type:"movie", phase:"Phase Three", poster:"posters/infinity-war.jpg"},
-  {id:"ant-man-wasp", title:"Ant-Man and the Wasp", year:2018, type:"movie", phase:"Phase Three", poster:"posters/ant-man-wasp.jpg"},
-  {id:"captain-marvel", title:"Captain Marvel", year:2019, type:"movie", phase:"Phase Three", poster:"posters/captain-marvel.jpg"},
-  {id:"endgame", title:"Avengers: Endgame", year:2019, type:"movie", phase:"Phase Three", poster:"posters/endgame.jpg"},
-  {id:"far-from-home", title:"Spider-Man: Far From Home", year:2019, type:"movie", phase:"Phase Three", poster:"posters/far-from-home.jpg"},
+  {id:"agent-carter-s2", title:"Agent Carter (Season 2)", year:2016, type:"series", universe:"mcu", phase:"Phase Three", poster:"posters/agent-carter-s2.jpg"},
+  {id:"civil-war", title:"Captain America: Civil War", year:2016, type:"movie", universe:"mcu", phase:"Phase Three", poster:"posters/civil-war.jpg"},
+  {id:"doctor-strange", title:"Doctor Strange", year:2016, type:"movie", universe:"mcu", phase:"Phase Three", poster:"posters/doctor-strange.jpg"},
+  {id:"gotg-2", title:"Guardians of the Galaxy Vol. 2", year:2017, type:"movie", universe:"mcu", phase:"Phase Three", poster:"posters/gotg-2.jpg"},
+  {id:"spiderman-homecoming", title:"Spider-Man: Homecoming", year:2017, type:"movie", universe:"mcu", phase:"Phase Three", poster:"posters/spiderman-homecoming.jpg"},
+  {id:"thor-ragnarok", title:"Thor: Ragnarok", year:2017, type:"movie", universe:"mcu", phase:"Phase Three", poster:"posters/thor-ragnarok.jpg"},
+  {id:"black-panther", title:"Black Panther", year:2018, type:"movie", universe:"mcu", phase:"Phase Three", poster:"posters/black-panther.jpg"},
+  {id:"infinity-war", title:"Avengers: Infinity War", year:2018, type:"movie", universe:"mcu", phase:"Phase Three", poster:"posters/infinity-war.jpg"},
+  {id:"ant-man-wasp", title:"Ant-Man and the Wasp", year:2018, type:"movie", universe:"mcu", phase:"Phase Three", poster:"posters/ant-man-wasp.jpg"},
+  {id:"captain-marvel", title:"Captain Marvel", year:2019, type:"movie", universe:"mcu", phase:"Phase Three", poster:"posters/captain-marvel.jpg"},
+  {id:"endgame", title:"Avengers: Endgame", year:2019, type:"movie", universe:"mcu", phase:"Phase Three", poster:"posters/endgame.jpg"},
+  {id:"far-from-home", title:"Spider-Man: Far From Home", year:2019, type:"movie", universe:"mcu", phase:"Phase Three", poster:"posters/far-from-home.jpg"},
 
   // Sony's Spider-Man Universe & Spider-Verse
-  {id:"venom", title:"Venom", year:2018, type:"movie", phase:"Spider-Verse & SSU", poster:"posters/venom.jpg"},
-  {id:"into-the-spider-verse", title:"Spider-Man: Into the Spider-Verse", year:2018, type:"animated", phase:"Spider-Verse & SSU", poster:"posters/into-the-spider-verse.jpg"},
-  {id:"venom-let-there-be-carnage", title:"Venom: Let There Be Carnage", year:2021, type:"movie", phase:"Spider-Verse & SSU", poster:"posters/venom-let-there-be-carnage.jpg"},
-  {id:"morbius", title:"Morbius", year:2022, type:"movie", phase:"Spider-Verse & SSU", poster:"posters/morbius.jpg"},
-  {id:"across-the-spider-verse", title:"Spider-Man: Across the Spider-Verse", year:2023, type:"animated", phase:"Spider-Verse & SSU", poster:"posters/across-the-spider-verse.jpg"},
-  {id:"madame-web", title:"Madame Web", year:2024, type:"movie", phase:"Spider-Verse & SSU", poster:"posters/madame-web.jpg"},
-  {id:"venom-the-last-dance", title:"Venom: The Last Dance", year:2024, type:"movie", phase:"Spider-Verse & SSU", poster:"posters/venom-the-last-dance.jpg"},
-  {id:"kraven-the-hunter", title:"Kraven the Hunter", year:2024, type:"movie", phase:"Spider-Verse & SSU", poster:"posters/kraven-the-hunter.jpg"},
+  {id:"venom", title:"Venom", year:2018, type:"movie", universe:"spiderverse", phase:"Spider-Verse & SSU", poster:"posters/venom.jpg"},
+  {id:"into-the-spider-verse", title:"Spider-Man: Into the Spider-Verse", year:2018, type:"animated", universe:"spiderverse", phase:"Spider-Verse & SSU", poster:"posters/into-the-spider-verse.jpg"},
+  {id:"venom-let-there-be-carnage", title:"Venom: Let There Be Carnage", year:2021, type:"movie", universe:"spiderverse", phase:"Spider-Verse & SSU", poster:"posters/venom-let-there-be-carnage.jpg"},
+  {id:"morbius", title:"Morbius", year:2022, type:"movie", universe:"spiderverse", phase:"Spider-Verse & SSU", poster:"posters/morbius.jpg"},
+  {id:"across-the-spider-verse", title:"Spider-Man: Across the Spider-Verse", year:2023, type:"animated", universe:"spiderverse", phase:"Spider-Verse & SSU", poster:"posters/across-the-spider-verse.jpg"},
+  {id:"madame-web", title:"Madame Web", year:2024, type:"movie", universe:"spiderverse", phase:"Spider-Verse & SSU", poster:"posters/madame-web.jpg"},
+  {id:"venom-the-last-dance", title:"Venom: The Last Dance", year:2024, type:"movie", universe:"spiderverse", phase:"Spider-Verse & SSU", poster:"posters/venom-the-last-dance.jpg"},
+  {id:"kraven-the-hunter", title:"Kraven the Hunter", year:2024, type:"movie", universe:"spiderverse", phase:"Spider-Verse & SSU", poster:"posters/kraven-the-hunter.jpg"},
 
   // MCU Phase Four
-  {id:"wandavision", title:"WandaVision", year:2021, type:"series", phase:"Phase Four", poster:"posters/wandavision.jpg"},
-  {id:"falcon-winter-soldier", title:"The Falcon and the Winter Soldier", year:2021, type:"series", phase:"Phase Four", poster:"posters/falcon-winter-soldier.jpg"},
-  {id:"loki-s1", title:"Loki (Season 1)", year:2021, type:"series", phase:"Phase Four", poster:"posters/loki-s1.jpg"},
-  {id:"black-widow", title:"Black Widow", year:2021, type:"movie", phase:"Phase Four", poster:"posters/black-widow.jpg"},
-  {id:"what-if-s1", title:"What If…? (Season 1)", year:2021, type:"animated", phase:"Phase Four", poster:"posters/what-if-s1.jpg"},
-  {id:"shang-chi", title:"Shang-Chi and the Legend of the Ten Rings", year:2021, type:"movie", phase:"Phase Four", poster:"posters/shang-chi.jpg"},
-  {id:"eternals", title:"Eternals", year:2021, type:"movie", phase:"Phase Four", poster:"posters/eternals.jpg"},
-  {id:"hawkeye", title:"Hawkeye", year:2021, type:"series", phase:"Phase Four", poster:"posters/hawkeye.jpg"},
-  {id:"no-way-home", title:"Spider-Man: No Way Home", year:2021, type:"movie", phase:"Phase Four", poster:"posters/no-way-home.jpg"},
-  {id:"moon-knight", title:"Moon Knight", year:2022, type:"series", phase:"Phase Four", poster:"posters/moon-knight.jpg"},
-  {id:"multiverse-madness", title:"Doctor Strange in the Multiverse of Madness", year:2022, type:"movie", phase:"Phase Four", poster:"posters/multiverse-madness.jpg"},
-  {id:"ms-marvel", title:"Ms. Marvel", year:2022, type:"series", phase:"Phase Four", poster:"posters/ms-marvel.jpg"},
-  {id:"love-thunder", title:"Thor: Love and Thunder", year:2022, type:"movie", phase:"Phase Four", poster:"posters/love-thunder.jpg"},
-  {id:"i-am-groot-s1", title:"I Am Groot (Season 1)", year:2022, type:"short", phase:"Phase Four", poster:"posters/i-am-groot-s1.jpg"},
-  {id:"she-hulk", title:"She-Hulk: Attorney at Law", year:2022, type:"series", phase:"Phase Four", poster:"posters/she-hulk.jpg"},
-  {id:"werewolf-by-night", title:"Werewolf by Night", year:2022, type:"special", phase:"Phase Four", poster:"posters/werewolf-by-night.jpg"},
-  {id:"wakanda-forever", title:"Black Panther: Wakanda Forever", year:2022, type:"movie", phase:"Phase Four", poster:"posters/wakanda-forever.jpg"},
-  {id:"gotg-holiday", title:"The Guardians of the Galaxy Holiday Special", year:2022, type:"special", phase:"Phase Four", poster:"posters/gotg-holiday.jpg"},
+  {id:"wandavision", title:"WandaVision", year:2021, type:"series", universe:"mcu", phase:"Phase Four", poster:"posters/wandavision.jpg"},
+  {id:"falcon-winter-soldier", title:"The Falcon and the Winter Soldier", year:2021, type:"series", universe:"mcu", phase:"Phase Four", poster:"posters/falcon-winter-soldier.jpg"},
+  {id:"loki-s1", title:"Loki (Season 1)", year:2021, type:"series", universe:"mcu", phase:"Phase Four", poster:"posters/loki-s1.jpg"},
+  {id:"black-widow", title:"Black Widow", year:2021, type:"movie", universe:"mcu", phase:"Phase Four", poster:"posters/black-widow.jpg"},
+  {id:"what-if-s1", title:"What If…? (Season 1)", year:2021, type:"animated", universe:"mcu", phase:"Phase Four", poster:"posters/what-if-s1.jpg"},
+  {id:"shang-chi", title:"Shang-Chi and the Legend of the Ten Rings", year:2021, type:"movie", universe:"mcu", phase:"Phase Four", poster:"posters/shang-chi.jpg"},
+  {id:"eternals", title:"Eternals", year:2021, type:"movie", universe:"mcu", phase:"Phase Four", poster:"posters/eternals.jpg"},
+  {id:"hawkeye", title:"Hawkeye", year:2021, type:"series", universe:"mcu", phase:"Phase Four", poster:"posters/hawkeye.jpg"},
+  {id:"no-way-home", title:"Spider-Man: No Way Home", year:2021, type:"movie", universe:"mcu", phase:"Phase Four", poster:"posters/no-way-home.jpg"},
+  {id:"moon-knight", title:"Moon Knight", year:2022, type:"series", universe:"mcu", phase:"Phase Four", poster:"posters/moon-knight.jpg"},
+  {id:"multiverse-madness", title:"Doctor Strange in the Multiverse of Madness", year:2022, type:"movie", universe:"mcu", phase:"Phase Four", poster:"posters/multiverse-madness.jpg"},
+  {id:"ms-marvel", title:"Ms. Marvel", year:2022, type:"series", universe:"mcu", phase:"Phase Four", poster:"posters/ms-marvel.jpg"},
+  {id:"love-thunder", title:"Thor: Love and Thunder", year:2022, type:"movie", universe:"mcu", phase:"Phase Four", poster:"posters/love-thunder.jpg"},
+  {id:"i-am-groot-s1", title:"I Am Groot (Season 1)", year:2022, type:"short", universe:"mcu", phase:"Phase Four", poster:"posters/i-am-groot-s1.jpg"},
+  {id:"she-hulk", title:"She-Hulk: Attorney at Law", year:2022, type:"series", universe:"mcu", phase:"Phase Four", poster:"posters/she-hulk.jpg"},
+  {id:"werewolf-by-night", title:"Werewolf by Night", year:2022, type:"special", universe:"mcu", phase:"Phase Four", poster:"posters/werewolf-by-night.jpg"},
+  {id:"wakanda-forever", title:"Black Panther: Wakanda Forever", year:2022, type:"movie", universe:"mcu", phase:"Phase Four", poster:"posters/wakanda-forever.jpg"},
+  {id:"gotg-holiday", title:"The Guardians of the Galaxy Holiday Special", year:2022, type:"special", universe:"mcu", phase:"Phase Four", poster:"posters/gotg-holiday.jpg"},
 
   // MCU Phase Five
-  {id:"quantumania", title:"Ant-Man and the Wasp: Quantumania", year:2023, type:"movie", phase:"Phase Five", poster:"posters/quantumania.jpg"},
-  {id:"gotg-3", title:"Guardians of the Galaxy Vol. 3", year:2023, type:"movie", phase:"Phase Five", poster:"posters/gotg-3.jpg"},
-  {id:"secret-invasion", title:"Secret Invasion", year:2023, type:"series", phase:"Phase Five", poster:"posters/secret-invasion.jpg"},
-  {id:"i-am-groot-s2", title:"I Am Groot (Season 2)", year:2023, type:"short", phase:"Phase Five", poster:"posters/i-am-groot-s2.jpg"},
-  {id:"loki-s2", title:"Loki (Season 2)", year:2023, type:"series", phase:"Phase Five", poster:"posters/loki-s2.jpg"},
-  {id:"the-marvels", title:"The Marvels", year:2023, type:"movie", phase:"Phase Five", poster:"posters/the-marvels.jpg"},
-  {id:"what-if-s2", title:"What If…? (Season 2)", year:2023, type:"animated", phase:"Phase Five", poster:"posters/what-if-s2.jpg"},
-  {id:"echo", title:"Echo", year:2024, type:"series", phase:"Phase Five", poster:"posters/echo.jpg"},
-  {id:"x-men-97", title:"X-Men '97 (Season 1)", year:2024, type:"animated", phase:"Phase Five", poster:"posters/x-men-97.jpg"},
-  {id:"deadpool-wolverine", title:"Deadpool & Wolverine", year:2024, type:"movie", phase:"Phase Five", poster:"posters/deadpool-wolverine.jpg"},
-  {id:"agatha-all-along", title:"Agatha All Along", year:2024, type:"series", phase:"Phase Five", poster:"posters/agatha-all-along.jpg"},
-  {id:"what-if-s3", title:"What If…? (Season 3)", year:2024, type:"animated", phase:"Phase Five", poster:"posters/what-if-s3.jpg"},
+  {id:"quantumania", title:"Ant-Man and the Wasp: Quantumania", year:2023, type:"movie", universe:"mcu", phase:"Phase Five", poster:"posters/quantumania.jpg"},
+  {id:"gotg-3", title:"Guardians of the Galaxy Vol. 3", year:2023, type:"movie", universe:"mcu", phase:"Phase Five", poster:"posters/gotg-3.jpg"},
+  {id:"secret-invasion", title:"Secret Invasion", year:2023, type:"series", universe:"mcu", phase:"Phase Five", poster:"posters/secret-invasion.jpg"},
+  {id:"i-am-groot-s2", title:"I Am Groot (Season 2)", year:2023, type:"short", universe:"mcu", phase:"Phase Five", poster:"posters/i-am-groot-s2.jpg"},
+  {id:"loki-s2", title:"Loki (Season 2)", year:2023, type:"series", universe:"mcu", phase:"Phase Five", poster:"posters/loki-s2.jpg"},
+  {id:"the-marvels", title:"The Marvels", year:2023, type:"movie", universe:"mcu", phase:"Phase Five", poster:"posters/the-marvels.jpg"},
+  {id:"what-if-s2", title:"What If…? (Season 2)", year:2023, type:"animated", universe:"mcu", phase:"Phase Five", poster:"posters/what-if-s2.jpg"},
+  {id:"echo", title:"Echo", year:2024, type:"series", universe:"mcu", phase:"Phase Five", poster:"posters/echo.jpg"},
+  {id:"x-men-97", title:"X-Men '97 (Season 1)", year:2024, type:"animated", universe:"mcu", phase:"Phase Five", poster:"posters/x-men-97.jpg"},
+  {id:"deadpool-wolverine", title:"Deadpool & Wolverine", year:2024, type:"movie", universe:"mcu", phase:"Phase Five", poster:"posters/deadpool-wolverine.jpg"},
+  {id:"agatha-all-along", title:"Agatha All Along", year:2024, type:"series", universe:"mcu", phase:"Phase Five", poster:"posters/agatha-all-along.jpg"},
+  {id:"what-if-s3", title:"What If…? (Season 3)", year:2024, type:"animated", universe:"mcu", phase:"Phase Five", poster:"posters/what-if-s3.jpg"},
 
   // MCU Phase Six
-  {id:"brave-new-world", title:"Captain America: Brave New World", year:2025, type:"movie", phase:"Phase Six", poster:"posters/brave-new-world.jpg"},
-  {id:"daredevil-born-again", title:"Daredevil: Born Again", year:2025, type:"series", phase:"Phase Six", poster:"posters/daredevil-born-again.jpg"},
-  {id:"thunderbolts", title:"Thunderbolts*", year:2025, type:"movie", phase:"Phase Six", poster:"posters/thunderbolts.jpg"},
-  {id:"ironheart", title:"Ironheart", year:2025, type:"series", phase:"Phase Six", poster:"posters/ironheart.jpg"},
-  {id:"fantastic-four", title:"The Fantastic Four: First Steps", year:2025, type:"movie", phase:"Phase Six", poster:"posters/fantastic-four.jpg"},
-  {id:"eyes-of-wakanda", title:"Eyes of Wakanda", year:2025, type:"animated", phase:"Phase Six", poster:"posters/eyes-of-wakanda.jpg"},
-  {id:"marvel-zombies", title:"Marvel Zombies", year:2025, type:"animated", phase:"Phase Six", poster:"posters/marvel-zombies.jpg"},
-  {id:"wonder-man", title:"Wonder Man", year:2025, type:"series", phase:"Phase Six", poster:"posters/wonder-man.jpg"}
+  {id:"brave-new-world", title:"Captain America: Brave New World", year:2025, type:"movie", universe:"mcu", phase:"Phase Six", poster:"posters/brave-new-world.jpg"},
+  {id:"daredevil-born-again", title:"Daredevil: Born Again", year:2025, type:"series", universe:"mcu", phase:"Phase Six", poster:"posters/daredevil-born-again.jpg"},
+  {id:"thunderbolts", title:"Thunderbolts*", year:2025, type:"movie", universe:"mcu", phase:"Phase Six", poster:"posters/thunderbolts.jpg"},
+  {id:"ironheart", title:"Ironheart", year:2025, type:"series", universe:"mcu", phase:"Phase Six", poster:"posters/ironheart.jpg"},
+  {id:"fantastic-four", title:"The Fantastic Four: First Steps", year:2025, type:"movie", universe:"mcu", phase:"Phase Six", poster:"posters/fantastic-four.jpg"},
+  {id:"eyes-of-wakanda", title:"Eyes of Wakanda", year:2025, type:"animated", universe:"mcu", phase:"Phase Six", poster:"posters/eyes-of-wakanda.jpg"},
+  {id:"marvel-zombies", title:"Marvel Zombies", year:2025, type:"animated", universe:"mcu", phase:"Phase Six", poster:"posters/marvel-zombies.jpg"},
+  {id:"wonder-man", title:"Wonder Man", year:2025, type:"series", universe:"mcu", phase:"Phase Six", poster:"posters/wonder-man.jpg"}
 ];
 
 const TYPE_LABEL = {movie:"Movie", series:"Series", short:"Short", special:"Special", animated:"Animated"};
@@ -575,14 +579,19 @@ function showFallback(posterBox, item){
 function escapeHtml(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 
 /* =========================================================
-   RENDER
+   RENDER & FILTER LOGIC
    ========================================================= */
 const mainEl = document.getElementById("main");
 
 function matchesFilter(item){
   if(currentFilter==="all") return true;
+  if(currentFilter==="mcu") return item.universe === "mcu";
+  if(currentFilter==="legacy") return item.universe === "legacy";
+  if(currentFilter==="defenders") return item.universe === "defenders";
+  if(currentFilter==="spiderverse") return item.universe === "spiderverse";
   return TYPE_GROUP(item.type) === currentFilter;
 }
+
 function matchesSearch(item){
   if(!currentSearch) return true;
   return item.title.toLowerCase().includes(currentSearch);
