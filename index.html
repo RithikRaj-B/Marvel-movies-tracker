@@ -33,7 +33,7 @@
   @media (prefers-reduced-motion: reduce){
     *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
   }
-  ::-webkit-scrollbar{width:10px;}
+  ::-webkit-scrollbar{width:8px; height:6px;}
   ::-webkit-scrollbar-track{background:var(--bg);}
   ::-webkit-scrollbar-thumb{background:var(--border); border-radius:6px;}
   button:focus-visible, input:focus-visible, .card:focus-visible{
@@ -43,7 +43,7 @@
 
   /* ================= HERO ================= */
   .hero{
-    padding:90px 6vw 50px;
+    padding:60px 5vw 40px;
     background:
       radial-gradient(ellipse 1100px 600px at 50% -15%, rgba(229,9,20,0.16), transparent 60%),
       var(--bg);
@@ -52,45 +52,45 @@
   .hero-eyebrow{
     font-family:'Inter', sans-serif;
     font-weight:700;
-    font-size:12px;
-    letter-spacing:0.32em;
+    font-size:11px;
+    letter-spacing:0.25em;
     text-transform:uppercase;
     color:var(--red);
-    margin:0 0 18px;
+    margin:0 0 12px;
   }
   .hero-title{
     font-family:'Bebas Neue', sans-serif;
-    font-size:clamp(56px, 11vw, 148px);
-    line-height:0.86;
+    font-size:clamp(48px, 11vw, 130px);
+    line-height:0.88;
     letter-spacing:0.01em;
     margin:0;
     text-transform:uppercase;
   }
   .hero-title .accent{color:var(--red);}
   .hero-sub{
-    font-size:18px;
+    font-size:15px;
     color:var(--gray);
     max-width:640px;
-    margin:20px 0 40px;
-    line-height:1.55;
+    margin:16px 0 30px;
+    line-height:1.5;
   }
 
   /* Progress counter */
   .progress-block{
-    display:flex; align-items:center; gap:26px; flex-wrap:wrap;
-    margin-bottom:38px;
+    display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+    margin-bottom:30px;
   }
   .progress-count{
     font-family:'Bebas Neue', sans-serif;
-    font-size:30px;
+    font-size:24px;
     letter-spacing:0.02em;
     white-space:nowrap;
   }
   .progress-count .num{color:var(--red);}
   .progress-track{
-    flex:1 1 260px;
-    min-width:200px;
-    height:12px;
+    flex:1 1 200px;
+    min-width:140px;
+    height:10px;
     background:var(--card);
     border:1px solid var(--border);
     border-radius:999px;
@@ -105,27 +105,42 @@
 
   /* Filters + search */
   .hero-controls{
-    display:flex; gap:16px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    display:flex; gap:16px; flex-direction:column; align-items:stretch;
   }
-  .filter-row{display:flex; gap:10px; flex-wrap:wrap;}
+  @media (min-width: 768px){
+    .hero-controls{flex-direction:row; align-items:center; justify-content:space-between;}
+  }
+
+  /* Mobile-friendly Horizontal Scroll Carousel for Filters */
+  .filter-row{
+    display:flex; gap:8px; overflow-x:auto; padding-bottom:6px;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none; /* Firefox */
+  }
+  .filter-row::-webkit-scrollbar{display:none;} /* Chrome/Safari */
+  
   .filter-btn{
     font-family:'Inter', sans-serif;
     font-weight:700;
-    font-size:12px;
+    font-size:11px;
     letter-spacing:0.04em;
     background:var(--card);
     border:1px solid var(--border);
     color:var(--gray);
-    padding:10px 20px;
+    padding:9px 16px;
     border-radius:999px;
     cursor:pointer;
     transition:all .18s ease;
     text-transform:uppercase;
+    white-space:nowrap;
+    flex-shrink:0;
   }
   .filter-btn:hover{border-color:var(--red); color:var(--white);}
   .filter-btn.active{background:var(--red); border-color:var(--red); color:#fff;}
 
-  .search-wrap{position:relative;}
+  .search-wrap{position:relative; width:100%;}
+  @media (min-width: 768px){ .search-wrap{width:auto;} }
+
   .search-wrap svg{position:absolute; left:15px; top:50%; transform:translateY(-50%); opacity:0.5;}
   .search-wrap input{
     background:var(--card);
@@ -135,26 +150,33 @@
     border-radius:999px;
     font-family:'Inter', sans-serif;
     font-size:14px;
-    width:230px;
-    transition:width .2s ease, border-color .2s ease;
+    width:100%;
+    transition:border-color .2s ease;
   }
-  .search-wrap input:focus{outline:none; border-color:var(--red); width:270px;}
+  @media (min-width: 768px){
+    .search-wrap input{width:230px;}
+    .search-wrap input:focus{width:270px;}
+  }
+  .search-wrap input:focus{outline:none; border-color:var(--red);}
   .search-wrap input::placeholder{color:var(--gray-dim);}
 
   /* ================= STICKY SUBNAV ================= */
   .subnav{
     position:sticky; top:0; z-index:60;
     display:none;
-    padding:14px 6vw;
-    background:rgba(13,13,13,0.9);
+    padding:12px 5vw;
+    background:rgba(13,13,13,0.95);
     backdrop-filter:blur(14px);
     border-bottom:1px solid var(--border);
   }
-  .subnav.visible{display:flex; gap:14px; align-items:center; justify-content:space-between; flex-wrap:wrap;}
+  .subnav.visible{display:flex; gap:12px; flex-direction:column; align-items:stretch;}
+  @media (min-width: 768px){
+    .subnav.visible{flex-direction:row; align-items:center; justify-content:space-between;}
+  }
 
   /* ================= QUOTE BANNER ================= */
   .quote-banner{
-    padding:80px 6vw;
+    padding:50px 5vw;
     text-align:center;
     position:relative;
     border-bottom:1px solid var(--border);
@@ -168,16 +190,16 @@
   }
   .quote-mark{
     font-family:'Bebas Neue', sans-serif;
-    font-size:120px;
+    font-size:80px;
     color:var(--red);
     line-height:0.5;
     opacity:0.9;
     display:block;
-    margin-bottom:6px;
+    margin-bottom:4px;
   }
   .quote-text{
     font-family:'Bebas Neue', sans-serif;
-    font-size:clamp(32px, 5.5vw, 64px);
+    font-size:clamp(26px, 5vw, 56px);
     letter-spacing:0.02em;
     margin:0 auto;
     max-width:900px;
@@ -186,8 +208,8 @@
     position:relative;
   }
   .quote-attribution{
-    margin-top:22px;
-    font-size:14px;
+    margin-top:16px;
+    font-size:12px;
     color:var(--gray);
     letter-spacing:0.04em;
     text-transform:uppercase;
@@ -195,29 +217,35 @@
   }
 
   /* ================= GRID ================= */
-  main{padding:60px 6vw 90px;}
+  main{padding:40px 5vw 70px;}
   .group-heading{
     font-family:'Bebas Neue', sans-serif;
-    font-size:26px;
+    font-size:22px;
     letter-spacing:0.05em;
     color:var(--white);
-    margin:50px 0 22px;
-    padding-bottom:12px;
+    margin:36px 0 18px;
+    padding-bottom:10px;
     border-bottom:2px solid var(--border);
-    display:flex; align-items:center; gap:12px;
+    display:flex; align-items:center; gap:10px;
   }
   .group-heading:first-child{margin-top:0;}
   .group-heading::before{
     content:"";
-    width:10px; height:10px;
+    width:8px; height:8px;
     background:var(--red);
     display:inline-block;
   }
+  
+  /* Responsive grid: 2 columns on phones, scaling smoothly up */
   .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(190px, 1fr));
-    gap:22px;
+    grid-template-columns:repeat(auto-fill, minmax(140px, 1fr));
+    gap:14px;
   }
+  @media (min-width: 480px){
+    .grid{ grid-template-columns:repeat(auto-fill, minmax(170px, 1fr)); gap:18px; }
+  }
+
   .card{
     background:var(--card);
     border:1px solid var(--border);
@@ -228,10 +256,10 @@
     transition:transform .22s ease, border-color .22s ease, box-shadow .22s ease, background .22s ease;
   }
   .card:hover{
-    transform:translateY(-6px);
+    transform:translateY(-4px);
     border-color:var(--red);
     background:var(--card-hover);
-    box-shadow:0 18px 34px -16px rgba(229,9,20,0.45);
+    box-shadow:0 12px 24px -12px rgba(229,9,20,0.45);
   }
   .card.watched{border-color:var(--green);}
 
@@ -250,26 +278,26 @@
   .poster-fallback{
     width:100%; height:100%;
     display:flex; flex-direction:column; align-items:center; justify-content:center;
-    text-align:center; padding:16px; gap:10px;
+    text-align:center; padding:12px; gap:8px;
   }
   .poster-fallback .glyph{
     font-family:'Bebas Neue', sans-serif;
-    font-size:38px; color:var(--red); opacity:0.85; line-height:1;
+    font-size:32px; color:var(--red); opacity:0.85; line-height:1;
   }
   .poster-fallback .ftitle{
-    font-family:'Inter', sans-serif; font-weight:600; font-size:13px;
-    color:var(--gray); line-height:1.3;
+    font-family:'Inter', sans-serif; font-weight:600; font-size:12px;
+    color:var(--gray); line-height:1.2;
   }
 
   .type-tag{
-    position:absolute; top:10px; left:10px;
+    position:absolute; top:8px; left:8px;
     font-family:'Inter', sans-serif;
     font-weight:700;
-    font-size:10px; letter-spacing:0.08em;
-    padding:4px 9px;
+    font-size:9px; letter-spacing:0.06em;
+    padding:3px 7px;
     border-radius:4px;
     text-transform:uppercase;
-    background:rgba(0,0,0,0.7);
+    background:rgba(0,0,0,0.75);
     backdrop-filter:blur(4px);
     color:var(--white);
     border:1px solid rgba(255,255,255,0.15);
@@ -280,17 +308,17 @@
   .type-special{border-color:rgba(162,75,214,0.5); color:#c47bff;}
 
   .watch-toggle{
-    position:absolute; top:10px; right:10px;
-    width:30px; height:30px;
+    position:absolute; top:8px; right:8px;
+    width:28px; height:28px;
     border-radius:50%;
-    background:rgba(0,0,0,0.65);
+    background:rgba(0,0,0,0.75);
     border:2px solid rgba(255,255,255,0.4);
     display:flex; align-items:center; justify-content:center;
     transition:all .18s ease;
     z-index:2;
   }
   .card.watched .watch-toggle{background:var(--green); border-color:var(--green);}
-  .watch-toggle svg{width:15px; height:15px; opacity:0; transition:opacity .15s ease;}
+  .watch-toggle svg{width:13px; height:13px; opacity:0; transition:opacity .15s ease;}
   .card.watched .watch-toggle svg{opacity:1;}
 
   .watched-overlay{
@@ -303,19 +331,19 @@
   .card.watched .watched-overlay{opacity:1;}
   .watched-overlay span{
     font-family:'Bebas Neue', sans-serif;
-    font-size:16px; letter-spacing:0.12em;
+    font-size:14px; letter-spacing:0.1em;
     color:var(--green);
     border:1.5px solid var(--green);
-    padding:5px 12px;
+    padding:4px 10px;
     transform:rotate(-6deg);
-    background:rgba(13,13,13,0.6);
+    background:rgba(13,13,13,0.7);
   }
 
-  .card-body{padding:12px 13px 15px;}
+  .card-body{padding:10px 11px 12px;}
   .card-title{
     font-family:'Inter', sans-serif;
     font-weight:700;
-    font-size:14.5px;
+    font-size:13px;
     line-height:1.25;
     margin:0 0 4px;
     color:var(--white);
@@ -328,29 +356,32 @@
   .card-year{
     font-family:'Inter', sans-serif;
     font-weight:500;
-    font-size:12px;
+    font-size:11px;
     color:var(--gray-dim);
   }
 
   .empty-state{
-    text-align:center; padding:90px 20px; color:var(--gray);
-    font-family:'Inter', sans-serif; font-size:17px;
+    text-align:center; padding:70px 20px; color:var(--gray);
+    font-family:'Inter', sans-serif; font-size:15px;
   }
 
   /* ================= FOOTER ================= */
   footer{
-    padding:44px 6vw 34px;
+    padding:34px 5vw 28px;
     border-top:1px solid var(--border);
-    display:flex; flex-wrap:wrap; gap:16px;
-    align-items:center; justify-content:space-between;
+    display:flex; flex-direction:column; gap:12px;
+    align-items:flex-start;
+  }
+  @media (min-width: 768px){
+    footer{flex-direction:row; align-items:center; justify-content:space-between;}
   }
   .footer-brand{
     font-family:'Bebas Neue', sans-serif;
-    font-size:22px; letter-spacing:0.03em;
+    font-size:20px; letter-spacing:0.03em;
   }
   .footer-brand .accent{color:var(--red);}
   .footer-note{
-    font-size:12.5px; color:var(--gray-dim); max-width:520px; line-height:1.6;
+    font-size:11.5px; color:var(--gray-dim); max-width:520px; line-height:1.5; margin:0;
   }
 </style>
 </head>
@@ -413,7 +444,7 @@
    DATA — Complete Marvel Content Universe
    ========================================================= */
 const MCU_DATA = [
-  // Legacy Marvel (Classic X-Men, Spider-Man, Blade, Ghost Rider, Daredevil)
+  // Legacy Marvel
   {id:"blade", title:"Blade", year:1998, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/blade.jpg"},
   {id:"x-men", title:"X-Men", year:2000, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/x-men.jpg"},
   {id:"blade-2", title:"Blade II", year:2002, type:"movie", universe:"legacy", phase:"Legacy Marvel", poster:"posters/blade-2.jpg"},
